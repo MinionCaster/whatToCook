@@ -7,7 +7,8 @@ const Ingredient = (props) => {
         <label>
             {props.ingredient}
             <input type="checkbox" 
-            name ={props.ingredient}/> 
+            name ={props.ingredient}
+            onChange={props.change}/> 
         </label>
     </div>
     )      
