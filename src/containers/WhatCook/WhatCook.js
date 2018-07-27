@@ -13,7 +13,9 @@ class WhatCook extends Component {
 
         return (
             <Aux>
+                <form>
                 {listRender}
+                </form>
                 <div>List of recipes</div>
             </Aux>
         );
