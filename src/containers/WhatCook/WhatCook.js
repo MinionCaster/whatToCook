@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import Ingredient from '../../components/Ingredient/Ingredient';
+import Recipe from '../../components/Recipe/Recipe';
 
 import Aux from '../../hoc/Aux';
 
@@ -8,7 +11,8 @@ class WhatCook extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients: []
+            ingredients: [],
+            searchResult: null
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -16,7 +20,6 @@ class WhatCook extends Component {
 
     handleInputChange(event) {
         const target = event.target;
-        //const value = target.type === 'chekbox' ? target.checked : target.value;
         const name = target.name;
 
         if (!this.state.ingredients.includes(name)) {
@@ -37,11 +40,24 @@ class WhatCook extends Component {
         }
     }
 
+    async getResults() {
+        try {
+            let ings = this.state.ingredients.join();
+            const res = await axios(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=81646eb51f036c0d182d5177515b52c5&q=${ings}`);
+            this.setState({searchResult: res}, function() {
+                console.log(this.state.searchResult);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     render () {
 
         const list = ['Meat', 'Cheese', 'Pasta', 'Tomatoes'];
-        let listRender = list.map(el => {
-          return <Ingredient ingredient={el} change={this.handleInputChange}/>
+        let listRender = list.map((el, index) => {
+          return <Ingredient key={index} ingredient={el} change={this.handleInputChange}/>
         })
 
         return (
@@ -49,7 +65,9 @@ class WhatCook extends Component {
                 <form>
                 {listRender}
                 </form>
-                <div>List of recipes</div>
+                <button onClick={this.getResults.bind(this)}>Search for recipes!</button>
+                <Recipe title="pasta" image="imghere" />
+                <Recipe title="pizza" image="imghere" />
             </Aux>
         );
     }
