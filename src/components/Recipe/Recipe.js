@@ -4,7 +4,7 @@ import classes from './Recipe.css';
 const recipe = (props) => {
     return (
         <div className={classes.Div}>
-            <p>{props.title}</p>
+            <p className={classes.Title}>{props.title}</p>
             <img className={classes.Image} src={props.image} alt={props.title} />
         </div>
     )

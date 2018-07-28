@@ -4,6 +4,12 @@
 }
 
 .Div {
+    position: relative;
     width: 350px;
     height: 350px;
+}
+
+.Title {
+    top: 25px;
+    left: 25px;
 }

@@ -39,12 +39,17 @@ class WhatCook extends Component {
     }
 
 
+
     render () {
+
+        const limitRecipeTitle = (title, limit = 30) => {
+            return title.length > limit ? title.substring(0, title.substring(0, limit).lastIndexOf(' ')) + '...': title;
+        }
 
         let recipeRender = null;
         if (this.state.searchResult != null) {
             recipeRender = this.state.searchResult.data.recipes.map(el => {
-                return <Recipe key={el.recipe_id} title={el.title} image={el.image_url} />
+                return <Recipe key={el.recipe_id} title={limitRecipeTitle(el.title)} image={el.image_url} />
             })
         }
 
