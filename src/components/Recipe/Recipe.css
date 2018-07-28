@@ -1,9 +1,82 @@
-.Image {
-    width: 300px;
-    height: 300px;
-}
-
-.Div {
-    width: 350px;
+.Container{
+    position: relative;
+    box-sizing: border-box;
+    width: 500px;
     height: 350px;
+    margin: 10px;
+    background: white;
+    border: solid #EEEEEE 1px;
+    border-radius: 5px;
+}
+.Pic{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 97%;
+    width: 98%;
+}
+.Pic img{
+    /* The Description Container */
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background: rgba(255,255,255,0.92);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    /* onMouseout ? */
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* overflow and text-overflow to avoid the text break the design 
+    or exit from its container */
+}
+.Menu{
+    position: absolute; 
+    top: 245px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    text-align: center;
+}
+.Title{
+    width: 50%;
+    font-size: 20px;
+    background-image: linear-gradient(to right, rgba(244, 92, 67, 0.85), rgba(235, 51, 73, 0.85));
+    padding: 10px, 15px;
+    position: absolute;
+    left:-30px;
+    border: 3px solid white;
+    top: -150px;
+    border-radius: 5px;
+    transform: rotate(-35deg);
+    color: white;
+    font-weight: 400;
+}
+.Check{ 
+    position: absolute;
+    top: -220px;
+    left: -40px;
+    background: rgba(235, 51, 73, 0.85);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(244, 92, 67, 0.85), rgba(235, 51, 73, 0.85));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(244, 92, 67, 0.85), rgba(235, 51, 73, 0.85)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    cursor: pointer;
+    color: white;
+    border: 3px solid white;
+ 		display: flex;
+		align-items: center;
+		justify-content: center;
+        height: 50px;
+        width: 35%;
+    font-size: 20px;
+    border-radius: 5px;
+    transform: rotate(-35deg);
+}
+.Check:hover{
+    /* Button Effect */
+    background: rgba(255,255,255,0.85);
+    color: rgb(235, 51, 73);
+    transition: color 0.2s linear, background 0.2s linear;
 }

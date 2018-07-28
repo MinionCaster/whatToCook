@@ -3,8 +3,8 @@ import SingleIngredient from './SingleIngredient/SingleIngredient';
 
 const singleRecipe = props => {
 
-    const ingredients = props.ingredients.map(el => {
-        return <SingleIngredient ing={el} />
+    const ingredients = props.ingredients.map((el, index) => {
+        return <SingleIngredient ing={el} key={index}/>
     })
     return (
         <div>
