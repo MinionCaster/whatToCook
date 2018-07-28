@@ -19,7 +19,7 @@ class WhatCook extends Component {
             searchResult: null,
             recipeClicked: false,
             currentId: '',
-            currentRecipe: ''
+            currentRecipe: null
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -83,10 +83,23 @@ class WhatCook extends Component {
             })
         }
 
+        let singleRecipeRender = null;
+        if(this.state.currentRecipe != null) {
+
+            singleRecipeRender = <SingleRecipe 
+            title={this.state.currentRecipe.data.recipe.title}
+            author={this.state.currentRecipe.data.recipe.publisher}
+            image={this.state.currentRecipe.data.recipe.image_url}
+            url={this.state.currentRecipe.data.recipe.source_url}
+            ingredients={this.state.currentRecipe.data.recipe.ingredients}
+            />
+        }
+
         return (
             <Aux>
                 
                 <Modal show={this.state.recipeClicked} modalClosed={this.recipeCancelHandler.bind(this)}>
+                    {singleRecipeRender}
                 </Modal>
                 <form onSubmit={this.getResults.bind(this)}>
                     <SearchBox change={this.handleInputChange} /> 
