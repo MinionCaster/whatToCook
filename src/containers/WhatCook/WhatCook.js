@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Recipe from '../../components/Recipe/Recipe';
-
 import Aux from '../../hoc/Aux';
+import Recipe from '../../components/Recipe/Recipe';
 import SearchBox from '../../components/SearchBox/SearchBox';
+
+import classes from './WhatCook.css';
 
 class WhatCook extends Component {
 
@@ -25,7 +26,8 @@ class WhatCook extends Component {
         });
     }
 
-    async getResults() {
+    async getResults(event) {
+        event.preventDefault();
         try {
             const res = await axios(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=81646eb51f036c0d182d5177515b52c5&q=${this.state.search}`);
             this.setState({searchResult: res}, function() {
@@ -48,11 +50,11 @@ class WhatCook extends Component {
 
         return (
             <Aux>
-                <form>
+                <form onSubmit={this.getResults.bind(this)}>
                 <SearchBox change={this.handleInputChange} /> 
                 </form>
                 <button onClick={this.getResults.bind(this)}>Search for recipes!</button>
-                {recipeRender}
+                <div className={classes.Flex}>{recipeRender}</div>
             </Aux>
         );
     }
