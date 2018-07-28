@@ -1,0 +1,13 @@
+.Input {
+    position: absolute;
+    top: 10px;
+    left: 38px;
+    font-size: 14px;
+    background: none;
+    color: #5a6674;
+    width: 195px;
+    height: 20px;
+    border: none;
+    appearance: none;
+    outline: none;
+}

@@ -101,10 +101,11 @@ class WhatCook extends Component {
                 <Modal show={this.state.recipeClicked} modalClosed={this.recipeCancelHandler.bind(this)}>
                     {singleRecipeRender}
                 </Modal>
-                <form onSubmit={this.getResults.bind(this)}>
+                <form className={classes.Form} onSubmit={this.getResults.bind(this)}>
                     <SearchBox change={this.handleInputChange} /> 
+                    {/* <button onClick={this.getResults.bind(this)}>Search for recipes!</button> */}
                 </form>
-                <button onClick={this.getResults.bind(this)}>Search for recipes!</button>
+                
                 <div className={classes.Flex}>
                     {recipeRender}
                 </div>
