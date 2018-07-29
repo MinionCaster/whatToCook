@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import SingleRecipe from '../../components/Recipe/SingleRecipe/SingleRecipe';
 import Recipe from '../../components/Recipe/Recipe';
 import SearchBox from '../../components/SearchBox/SearchBox';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 import classes from './WhatCook.css';
@@ -19,7 +20,8 @@ class WhatCook extends Component {
             searchResult: null,
             recipeClicked: false,
             currentId: '',
-            currentRecipe: null
+            currentRecipe: null,
+            loading: false
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -47,8 +49,8 @@ class WhatCook extends Component {
     async singleResult() {
         try {
             const res = await axios(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/get?key=81646eb51f036c0d182d5177515b52c5&&rId=${this.state.currentId}`);
-            this.setState({currentRecipe: res}, function() {
-                console.log(this.state.currentRecipe.data.recipe);
+            this.setState({currentRecipe: res, loading: false}, function() {
+                console.log(this.state.loading);
             });
         } catch (error) {
             console.log(error);
@@ -56,16 +58,16 @@ class WhatCook extends Component {
     }
 
     recipeClickedHandler(id) {
-        this.setState({recipeClicked: true});
+        this.setState({recipeClicked: true, loading: true});
         this.setState({currentId: id}, function() {
-            console.log(this.state.currentId);
+            console.log(this.state.loading);
             this.singleResult();
         })
         
     }
 
     recipeCancelHandler() {
-        this.setState({recipeClicked: false});
+        this.setState({recipeClicked: false, currentRecipe: null});
     }
 
 
@@ -83,9 +85,8 @@ class WhatCook extends Component {
             })
         }
 
-        let singleRecipeRender = null;
+        let singleRecipeRender = <Spinner />;
         if(this.state.currentRecipe != null) {
-
             singleRecipeRender = <SingleRecipe 
             title={this.state.currentRecipe.data.recipe.title}
             author={this.state.currentRecipe.data.recipe.publisher}
@@ -97,7 +98,6 @@ class WhatCook extends Component {
 
         return (
             <Aux>
-                
                 <Modal show={this.state.recipeClicked} modalClosed={this.recipeCancelHandler.bind(this)}>
                     {singleRecipeRender}
                 </Modal>
