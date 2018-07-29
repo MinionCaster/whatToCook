@@ -37,9 +37,10 @@ class WhatCook extends Component {
 
     async getResults(event) {
         event.preventDefault();
+        this.setState({loading: true});
         try {
             const res = await axios(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=81646eb51f036c0d182d5177515b52c5&q=${this.state.search}`);
-            this.setState({searchResult: res}, function() {
+            this.setState({searchResult: res, loading: false}, function() {
                 console.log(this.state.searchResult.data.recipes);
             });
         } catch (error) {
@@ -80,6 +81,9 @@ class WhatCook extends Component {
         }
 
         let recipeRender = null;
+        if (this.state.loading) {
+            recipeRender = <Spinner />;
+        }
         if (this.state.searchResult != null) {
             recipeRender = this.state.searchResult.data.recipes.map(el => {
                 return <Recipe key={el.recipe_id} title={limitRecipeTitle(el.title)} image={el.image_url} clicked={this.recipeClickedHandler.bind(this, el.recipe_id)}/>
