@@ -1,6 +1,25 @@
 import React from 'react';
+import {Fraction} from 'fractional';
 
 /* eslint no-eval: 0 */
+
+const formatCount = count => {
+    if (count) {
+        const newCount = Math.round(count * 100) / 100;
+        const [int, dec] = newCount.toString().split('.').map(el => parseInt(el, 10));
+
+        if (!dec) return newCount;
+
+        if (int === 0) {
+            const fr = new Fraction(newCount);
+            return `${fr.numerator}/${fr.denominator}`;
+        } else {
+            const fr = new Fraction(newCount - int);
+            return `${int} ${fr.numerator}/${fr.denominator}`
+        }
+    } 
+    return '';
+}
 
 const singleIngredient = (props) => {
 
@@ -79,10 +98,10 @@ const singleIngredient = (props) => {
     }
 
     let ing = parseIngredients(props.ing);
-
+    ing.count = formatCount(ing.count);
     return (
         <ul>
-            {ing.count} +
+            {ing.count}
             {ing.unit} 
             {ing.ingredient} 
         </ul>
