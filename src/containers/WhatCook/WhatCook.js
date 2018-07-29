@@ -4,6 +4,7 @@ import axios from 'axios';
 import Aux from '../../hoc/Aux';
 import Modal from '../../components/UI/Modal/Modal';
 import SingleRecipe from '../../components/Recipe/SingleRecipe/SingleRecipe';
+import SearchButton from '../../components/UI/SearchButton/SearchButton';
 import Recipe from '../../components/Recipe/Recipe';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -103,7 +104,7 @@ class WhatCook extends Component {
                 </Modal>
                 <form className={classes.Form} onSubmit={this.getResults.bind(this)}>
                     <SearchBox change={this.handleInputChange} /> 
-                    {/* <button onClick={this.getResults.bind(this)}>Search for recipes!</button> */}
+                    <SearchButton clicked={this.getResults.bind(this)} />
                 </form>
                 
                 <div className={classes.Flex}>
